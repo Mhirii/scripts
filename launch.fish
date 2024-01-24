@@ -68,17 +68,8 @@ switch $arg
 
     case terminal
         wezterm
-    case terminal1
-        alacritty
     case terminal2
-        footclient
-
-    case zellij
-        if test ( zellij ls | rg main )
-            $terminal -e --hold zellij a main &
-        else
-            $terminal -e --hold zellij -s main -l main &
-        end
+        alacritty
 
     case tmux
         alacritty -T tmux -e tmux a &
