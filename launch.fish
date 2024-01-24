@@ -59,6 +59,10 @@ switch $arg
     case rofi
         rofi -show drun
 
+    case dmenu
+        bemenu-run
+
+
     case launcher
         ags -t applauncher
 
