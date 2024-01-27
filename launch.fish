@@ -8,7 +8,6 @@ end
 set arg $argv[1]
 
 # defaults
-set browser $BROWSER
 set terminal wezterm
 set editor $EDITOR
 set files $FILEMANAGER
@@ -51,8 +50,16 @@ switch $arg
             firefox
         end
 
+    case vivaldi
+        if isRunning vivaldi
+            hyprctl dispatch workspace (getWorkspaceId "vivaldi")
+        else
+            vivaldi
+        end
+
+
     case code
-        code \
+        c \
             --ozone-platform=wayland \
             --enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer
 
