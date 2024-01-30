@@ -8,7 +8,7 @@ end
 set arg $argv[1]
 
 # defaults
-set terminal wezterm
+set terminal alacritty
 set editor $EDITOR
 set files $FILEMANAGER
 
@@ -51,8 +51,11 @@ switch $arg
         end
 
     case vivaldi
-        if isRunning vivaldi
-            hyprctl dispatch workspace (getWorkspaceId "vivaldi")
+        if pgrep vivaldi >/dev/null
+            set vivladiClient (hyprctl clients -j | jq ".[] | select(.initialClass == \"vivaldi-stable\") | .workspace.id")
+            if test -n "$vivladiClient"
+                hyprctl dispatch workspace $vivladiClient
+            end
         else
             vivaldi
         end
@@ -74,9 +77,9 @@ switch $arg
         ags -t applauncher
 
     case terminal
-        wezterm
-    case terminal2
         alacritty
+    case terminal2
+        wezterm
 
     case tmux
         alacritty -T tmux -e tmux a &
