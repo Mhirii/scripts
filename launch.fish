@@ -92,7 +92,7 @@ switch $arg
     case lunarvim
         $terminal --hold -e lvim &
     case lunarvide
-        neovide --neovim-bin ~/.local/bin/lvim --multigrid
+        neovide --neovim-bin ~/.local/bin/lvim
 
     case filesgui
         $files
