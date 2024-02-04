@@ -82,7 +82,12 @@ switch $arg
         wezterm
 
     case tmux
-        alacritty -T tmux -e tmux a &
+        if tmux has
+            alacritty -T tmux -e tmux a &
+        else
+            tmux new -d -s Default
+            alacritty -T tmux -e tmux a &
+        end
 
     case nvim
         $terminal --hold -e nvim &
