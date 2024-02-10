@@ -62,9 +62,8 @@ switch $arg
 
 
     case code
-        c \
-            --ozone-platform=wayland \
-            --enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer
+        /usr/bin/code \
+            --password-store="gnome" --ozone-platform=wayland
 
     case rofi
         rofi -show drun
@@ -128,7 +127,7 @@ switch $arg
     case hypr_launch
         hyprctl keyword general:col.active_border "rgba(bada55ff) rgba(1a1b26ff)"
     case hypr_reset
-        hyprctl reload
+        hyprctl keyword general:col.active_border "rgba(f7768eff)"
     case hypr_windowmode
         hyprctl keyword general:col.active_border "rgba(E05F65ff) rgba(1a1b26ff)"
 end
