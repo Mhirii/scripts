@@ -1,8 +1,5 @@
 #!/bin/fish
 
-
-
-
 function toggle_mute
     if test (pamixer --get-mute) = true
         if test (ps aux | rg ags | wc -l) -gt 1

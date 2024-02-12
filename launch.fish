@@ -127,7 +127,7 @@ switch $arg
     case hypr_launch
         hyprctl keyword general:col.active_border "rgba(bada55ff) rgba(1a1b26ff)"
     case hypr_reset
-        hyprctl keyword general:col.active_border "rgba(f7768eff)"
+        ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('nero')"
     case hypr_windowmode
         hyprctl keyword general:col.active_border "rgba(E05F65ff) rgba(1a1b26ff)"
 end
