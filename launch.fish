@@ -127,7 +127,16 @@ switch $arg
     case hypr_launch
         hyprctl keyword general:col.active_border "rgba(bada55ff) rgba(1a1b26ff)"
     case hypr_reset
-        ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('nero')"
+        switch $theme
+            case tokyonight
+                ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('Tokyo')"
+            case rosepine
+                ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('RosePine')"
+            case nero
+                ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('nero')"
+            case idx
+                ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('idx')"
+        end
     case hypr_windowmode
-        hyprctl keyword general:col.active_border "rgba(E05F65ff) rgba(1a1b26ff)"
+        hyprctl keyword general:col.active_border "rgba(FA7A55ff) rgba(00000000) rgba(FA7A55ff) rgba(00000000)"
 end
