@@ -1,6 +1,6 @@
 #!/bin/bash
 
-themes=$(echo -e " Tokyonight \n Rosepine \n Nero ")
+themes=$(echo -e " Tokyonight \n Rosepine \n Nero \n IDX ")
 selected_theme=$(echo -e "$themes" | rofi -dmenu -i -config ~/.config/rofi/config.rasi)
 fish=~/.config/fish/current_theme.fish
 wezterm=~/.config/wezterm/ui.lua
@@ -52,6 +52,12 @@ set_theme() {
 		sed -i 's/M.color_scheme = "\(.*\)"/M.color_scheme = "nero"/' $wezterm
 		sed -i 's/theme = "\(.*\)"/theme = "nero"/' $chezmoi
 		;;
+	"idx")
+		ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('idx')"
+		sed -i 's/set -x theme .*$/set -x theme idx/' $fish
+		sed -i 's/M.color_scheme = "\(.*\)"/M.color_scheme = "idx"/' $wezterm
+		sed -i 's/theme = "\(.*\)"/theme = "idx"/' $chezmoi
+		;;
 	esac
 }
 
@@ -67,5 +73,9 @@ case $selected_theme in
 " Nero ")
 	set_theme nero
 	notify-send theme nero
+	;;
+" IDX ")
+	set_theme idx
+	notify-send theme idx
 	;;
 esac
