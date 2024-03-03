@@ -29,6 +29,21 @@ mako_theme() {
 	ln -sf $theme_path $HOME/.config/mako/config
 }
 
+link_wallpaper() {
+	ln -sf $HOME/.config/ags/assets/$1.png $HOME/.config/hypr/background.png
+}
+
+set_wallpaper() {
+	pos=$(hyprctl cursorpos | sed 's/-//' | sed 's/\ //')
+	swww img --transition-type grow --transition-duration 2.0 $HOME/.config/hypr/background.png
+}
+
+set_hypr_theme() {
+	sed -i "s/theme =.*/theme = $1/" $HOME/.config/hypr/hyprlock.conf
+	sed -i "s/theme =.*/theme = $1/" $HOME/.config/hypr/hyprland.conf
+
+}
+
 set_theme() {
 	alacritty_theme $1
 	rofi_theme $1
@@ -39,24 +54,36 @@ set_theme() {
 		sed -i 's/set -x theme .*$/set -x theme tokyonight/' $fish
 		sed -i 's/M.color_scheme = "\(.*\)"/M.color_scheme = "tokyonight"/' $wezterm
 		sed -i 's/theme = "\(.*\)"/theme = "tokyonight"/' $chezmoi
+		link_wallpaper tokyo
+		set_wallpaper tokyo
+		set_hypr_theme tokyonight
 		;;
 	"rosepine")
 		ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('RosePine')"
 		sed -i 's/set -x theme .*$/set -x theme rosepine/' $fish
 		sed -i 's/M.color_scheme = "\(.*\)"/M.color_scheme = "rosepine"/' $wezterm
 		sed -i 's/theme = "\(.*\)"/theme = "rosepine"/' $chezmoi
+		link_wallpaper pine
+		set_wallpaper pine
+		set_hypr_theme rosepine
 		;;
 	"nero")
 		ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('nero')"
 		sed -i 's/set -x theme .*$/set -x theme nero/' $fish
 		sed -i 's/M.color_scheme = "\(.*\)"/M.color_scheme = "nero"/' $wezterm
 		sed -i 's/theme = "\(.*\)"/theme = "nero"/' $chezmoi
+		link_wallpaper nero
+		set_wallpaper nero
+		set_hypr_theme nero
 		;;
 	"idx")
 		ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('idx')"
 		sed -i 's/set -x theme .*$/set -x theme idx/' $fish
 		sed -i 's/M.color_scheme = "\(.*\)"/M.color_scheme = "idx"/' $wezterm
 		sed -i 's/theme = "\(.*\)"/theme = "idx"/' $chezmoi
+		link_wallpaper idx
+		set_wallpaper idx
+		set_hypr_theme idx
 		;;
 	esac
 }
