@@ -5,6 +5,7 @@ selected_theme=$(echo -e "$themes" | rofi -dmenu -i -config ~/.config/rofi/confi
 fish=~/.config/fish/current_theme.fish
 wezterm=~/.config/wezterm/ui.lua
 chezmoi=~/.config/chezmoi/chezmoi.toml
+nvim=~/.config/nvim/lua/custom/ui.lua
 
 alacritty_theme() {
 	theme_name="$1"
@@ -57,6 +58,7 @@ set_theme() {
 		link_wallpaper tokyo
 		set_wallpaper tokyo
 		set_hypr_theme tokyonight
+		sed -i 's/theme = ".*", -- sed mark/theme = "tokyonight", -- sed mark/' $nvim
 		;;
 	"rosepine")
 		ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('RosePine')"
@@ -66,6 +68,7 @@ set_theme() {
 		link_wallpaper pine
 		set_wallpaper pine
 		set_hypr_theme rosepine
+		sed -i 's/theme = ".*", -- sed mark/theme = "rosepine", -- sed mark/' $nvim
 		;;
 	"nero")
 		ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('nero')"
@@ -75,6 +78,7 @@ set_theme() {
 		link_wallpaper nero
 		set_wallpaper nero
 		set_hypr_theme nero
+		sed -i 's/theme = ".*", -- sed mark/theme = "nero", -- sed mark/' $nvim
 		;;
 	"idx")
 		ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('idx')"
@@ -84,6 +88,7 @@ set_theme() {
 		link_wallpaper idx
 		set_wallpaper idx
 		set_hypr_theme idx
+		sed -i 's/theme = ".*", -- sed mark/theme = "idx", -- sed mark/' $nvim
 		;;
 	esac
 }
