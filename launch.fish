@@ -108,7 +108,7 @@ switch $arg
         cliphist list | rofi -dmenu | cliphist decode | wl-copy
 
     case spotify
-        run_electron spotify
+         spotify
 
     case spt
         spotifyd
