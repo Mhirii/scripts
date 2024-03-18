@@ -45,13 +45,19 @@ set_hypr_theme() {
 
 }
 
+set_ags_theme() {
+	if pgrep -x "ags" >/dev/null; then
+		ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('$1')"
+	fi
+}
+
 set_theme() {
 	alacritty_theme $1
 	rofi_theme $1
 	mako_theme $1
 	case $1 in
 	"tokyonight")
-		ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('Tokyo')"
+		set_ags_theme Tokyo
 		sed -i 's/set -x theme .*$/set -x theme tokyonight/' $fish
 		sed -i 's/M.color_scheme = "\(.*\)"/M.color_scheme = "tokyonight"/' $wezterm
 		sed -i 's/theme = "\(.*\)"/theme = "tokyonight"/' $chezmoi
@@ -61,7 +67,7 @@ set_theme() {
 		sed -i 's/theme = ".*", -- sed mark/theme = "tokyonight", -- sed mark/' $nvim
 		;;
 	"rosepine")
-		ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('RosePine')"
+		set_ags_theme RosePine
 		sed -i 's/set -x theme .*$/set -x theme rosepine/' $fish
 		sed -i 's/M.color_scheme = "\(.*\)"/M.color_scheme = "rosepine"/' $wezterm
 		sed -i 's/theme = "\(.*\)"/theme = "rosepine"/' $chezmoi
@@ -71,7 +77,7 @@ set_theme() {
 		sed -i 's/theme = ".*", -- sed mark/theme = "rosepine", -- sed mark/' $nvim
 		;;
 	"nero")
-		ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('nero')"
+		set_ags_theme nero
 		sed -i 's/set -x theme .*$/set -x theme nero/' $fish
 		sed -i 's/M.color_scheme = "\(.*\)"/M.color_scheme = "nero"/' $wezterm
 		sed -i 's/theme = "\(.*\)"/theme = "nero"/' $chezmoi
@@ -81,7 +87,7 @@ set_theme() {
 		sed -i 's/theme = ".*", -- sed mark/theme = "nero", -- sed mark/' $nvim
 		;;
 	"idx")
-		ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('idx')"
+		set_ags_theme idx
 		sed -i 's/set -x theme .*$/set -x theme idx/' $fish
 		sed -i 's/M.color_scheme = "\(.*\)"/M.color_scheme = "idx"/' $wezterm
 		sed -i 's/theme = "\(.*\)"/theme = "idx"/' $chezmoi
