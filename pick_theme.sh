@@ -51,6 +51,16 @@ set_ags_theme() {
 	fi
 }
 
+set_waybar_theme() {
+	theme_path=${HOME}/.config/waybar/themes/${1}.css
+	ln -sf $theme_path $HOME/.config/waybar/theme.css
+	procs=$(pgrep -x ags | wc -l)
+	pkill waybar
+	if [ $procs -lt 1 ]; then
+		waybar &
+	fi
+}
+
 set_theme() {
 	alacritty_theme $1
 	rofi_theme $1
@@ -65,6 +75,7 @@ set_theme() {
 		set_wallpaper tokyo
 		set_hypr_theme tokyonight
 		sed -i 's/theme = ".*", -- sed mark/theme = "tokyonight", -- sed mark/' $nvim
+		set_waybar_theme tokyonight
 		;;
 	"rosepine")
 		set_ags_theme RosePine
@@ -75,6 +86,7 @@ set_theme() {
 		set_wallpaper pine
 		set_hypr_theme rosepine
 		sed -i 's/theme = ".*", -- sed mark/theme = "rosepine", -- sed mark/' $nvim
+		set_waybar_theme rosepine
 		;;
 	"nero")
 		set_ags_theme nero
@@ -85,6 +97,7 @@ set_theme() {
 		set_wallpaper nero
 		set_hypr_theme nero
 		sed -i 's/theme = ".*", -- sed mark/theme = "nero", -- sed mark/' $nvim
+		set_waybar_theme nero
 		;;
 	"idx")
 		set_ags_theme idx
@@ -95,6 +108,7 @@ set_theme() {
 		set_wallpaper idx
 		set_hypr_theme idx
 		sed -i 's/theme = ".*", -- sed mark/theme = "idx", -- sed mark/' $nvim
+		set_waybar_theme idx
 		;;
 	esac
 }
