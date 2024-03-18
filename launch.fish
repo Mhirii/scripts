@@ -108,7 +108,7 @@ switch $arg
         cliphist list | rofi -dmenu | cliphist decode | wl-copy
 
     case spotify
-         spotify
+        spotify
 
     case spt
         spotifyd
@@ -127,15 +127,28 @@ switch $arg
     case hypr_launch
         hyprctl keyword general:col.active_border "rgba(bada55ff) rgba(1a1b26ff)"
     case hypr_reset
+        if test (pgrep ags)
+            notify-send Hyprland "Resetting Hyprland"
+            switch $theme
+                case tokyonight
+                    ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('Tokyo')"
+                case rosepine
+                    ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('RosePine')"
+                case nero
+                    ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('nero')"
+                case idx
+                    ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('idx')"
+            end
+        end
         switch $theme
             case tokyonight
-                ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('Tokyo')"
+                hyprctl keyword general:col.active_border "rgba(f7768eff)"
             case rosepine
-                ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('RosePine')"
+                hyprctl keyword general:col.active_border "rgba(31748fff)"
             case nero
-                ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('nero')"
+                hyprctl keyword general:col.active_border "rgba(0da8f2ff)"
             case idx
-                ags -r "(await import('file://$HOME/.config/ags/js/settings/theme.js')).setTheme('idx')"
+                hyprctl keyword general:col.active_border "rgba(a87ffbff)"
         end
     case hypr_windowmode
         hyprctl keyword general:col.active_border "rgba(FA7A55ff) rgba(00000000) rgba(FA7A55ff) rgba(00000000)"
