@@ -1,6 +1,6 @@
 #!/bin/bash
 
-options=" Theme \n Waybar \n Ags \n rofi "
+options=" Theme \n Waybar \n Tmux \n Ags \n rofi \n icons "
 selected=$(echo -e "$options" | rofi -dmenu -i -p "Select Option")
 
 case $selected in
@@ -16,5 +16,11 @@ case $selected in
 	;;
 " rofi ")
 	rofi -show drun
+	;;
+" Tmux ")
+	"$HOME/scripts/rofi_tmux.sh"
+	;;
+" icons ")
+	bat "$HOME/Documents/nerdfont.txt" | rofi -dmenu -i | awk '{print $1}' | wl-copy
 	;;
 esac
