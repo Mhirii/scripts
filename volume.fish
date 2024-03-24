@@ -2,12 +2,12 @@
 
 function toggle_mute
     if test (pamixer --get-mute) = true
-        if test (ps aux | rg ags | wc -l) -gt 1
+        if test (ps aux | rg bin/ags | wc -l) -gt 1
             ags -r 'audio.speaker.is_muted = false; indicator.speaker()'
         end
         pamixer -u
     else if test (pamixer --get-mute) = false
-        if test (ps aux | rg ags | wc -l) -gt 1
+        if test (ps aux | rg bin/ags | wc -l) -gt 1
             ags -r 'audio.speaker.is_muted = true; indicator.speaker()'
         end
         pamixer -m
@@ -24,7 +24,7 @@ end
 
 function inc_volume
 
-    if test (ps aux | rg ags | wc -l) -gt 1
+    if test (ps aux | rg bin/ags | wc -l) -gt 1
         ags -r 'audio.speaker.volume += 0.05; indicator.speaker()'
     else
         pamixer -i 5
@@ -32,7 +32,7 @@ function inc_volume
 end
 
 function dec_volume
-    if test (ps aux | rg ags | wc -l) -gt 1
+    if test (ps aux | rg bin/ags | wc -l) -gt 1
         ags -r 'audio.speaker.volume -= 0.05; indicator.speaker()'
     else
         pamixer -d 5
@@ -59,7 +59,7 @@ else
     echo "inc:    increase volume"
     echo "dec:    decrease volume"
     echo "vol:    current volume"
-    if test (ps aux | rg ags | wc -l) -gt 1
+    if test (ps aux | rg bin/ags | wc -l) -gt 1
         echo yes
     end
 end
