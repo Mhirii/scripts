@@ -33,6 +33,12 @@ function getWorkspaceId
     end
 end
 
+function handleWarp
+    hyprctl dispatch focuswindow "dev.warp.Warp"
+    hyprctl dispatch togglefloating "dev.warp.Warp"
+    hyprctl dispatch movetoworkspace 1
+end
+
 function run_electron
     if test $XDG_SESSION_TYPE = wayland
         $argv[1] --ozone-platform=wayland --enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer
@@ -123,6 +129,27 @@ switch $arg
 
     case insomnia
         run_electron insomnia &
+
+    case warp
+        if test (hyprctl clients -j | jq '.[] | select(.class == "dev.warp.Warp")' | wc -l) -eq 0
+            warp-terminal & disown
+            set warpIsOpen (hyprctl clients -j | jq '.[] | select(.class == "dev.warp.Warp")' | wc -l)
+            while test $warpIsOpen -eq 0
+                set warpIsOpen (hyprctl clients -j | jq '.[] | select(.class == "dev.warp.Warp")' | wc -l)
+                echo
+                echo
+                echo
+                echo "warp = $warpIsOpen"
+                echo "Waiting for Warp to open"
+                echo
+                echo
+                echo
+                sleep 0.1
+            end
+            handleWarp
+        else
+            hyprctl dispatch focuswindow "dev.warp.Warp"
+        end
 
     case hypr_launch
         hyprctl keyword general:col.active_border "rgba(bada55ff) rgba(1a1b26ff)"
