@@ -27,11 +27,15 @@ rofi_theme() {
 
 mako_theme() {
 	theme_path=${HOME}/.config/mako/${1}
-	ln -sf $theme_path $HOME/.config/mako/config
+	default_path=${HOME}/.config/mako/default
+	config_path=${HOME}/.config/mako/config
+	cp "$default_path" "$config_path"
+	cat "$theme_path" >>"$config_path"
+	makoctl reload
 }
 
 link_wallpaper() {
-	ln -sf $HOME/.config/ags/assets/$1.png $HOME/.config/hypr/background.png
+	ln -sf $HOME/.config/hypr/wallpapers/$1.png $HOME/.config/hypr/background.png
 }
 
 set_wallpaper() {
