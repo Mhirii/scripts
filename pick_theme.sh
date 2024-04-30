@@ -39,8 +39,10 @@ link_wallpaper() {
 }
 
 set_wallpaper() {
-	pos=$(hyprctl cursorpos | sed 's/-//' | sed 's/\ //')
-	swww img --transition-type grow --transition-duration 2.0 $HOME/.config/hypr/background.png
+	# pos=$(hyprctl cursorpos | sed 's/-//' | sed 's/\ //')
+	# swww img --transition-type grow --transition-duration 2.0 $HOME/.config/hypr/background.png
+	pkill hyprpaper
+	hyprpaper &
 }
 
 set_hypr_theme() {

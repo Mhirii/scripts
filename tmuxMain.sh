@@ -7,7 +7,7 @@ tmux rename-window 'btop'
 tmux new-window -n 'spotify'
 tmux send-keys 'spt' 'C-m'
 
-tmux split-window -h 'cava'
+# tmux split-window -h 'cava'
 # tmux send-keys 'cava' 'C-m'
 
 tmux select-window -t 1

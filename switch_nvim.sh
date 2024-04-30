@@ -2,8 +2,8 @@
 # ── Options ─────────────────────────────────────────────────────
 nvchad=1
 lazyvim=1
-astrovim=0
-normalnvim=1
+astrovim=1
+normalnvim=0
 
 declare -A config_vars
 config_vars=(["nvchad"]=$nvchad ["lazyvim"]=$lazyvim ["astrovim"]=$astrovim ["normalnvim"]=$normalnvim)
@@ -97,6 +97,10 @@ find_dir() {
 select_config() {
 	if [[ $has_fzf -eq 1 ]]; then
 		selected_config=$(echo "${nvim_configs[@]}" | tr ' ' '\n' | fzf)
+		if [ -z "$selected_config" ]; then
+			echo_error "No config selected"
+			exit 1
+		fi
 	else
 		echo_error "fzf is not installed"
 	fi
@@ -152,6 +156,9 @@ switch_config() {
 	verboseEcho "Moving nvim to $HOME/.local/state/$existing_config" "green"
 	mv "$HOME/.local/state/nvim" "$HOME/.local/state/$existing_config"
 
+	verboseEcho "Moving nvim to $HOME/.cache/$existing_config" "green"
+	mv "$HOME/.cache/nvim" "$HOME/.cache/$existing_config"
+
 	verboseEcho "Moving $new_config to $HOME/.config/nvim" "green"
 	mv "$HOME/.config/$new_config" "$HOME/.config/nvim"
 
@@ -160,6 +167,9 @@ switch_config() {
 
 	verboseEcho "Moving $new_config to $HOME/.local/state/nvim" "green"
 	mv "$HOME/.local/state/$new_config" "$HOME/.local/state/nvim"
+
+	verboseEcho "Moving $new_config to $HOME/.cache/nvim" "green"
+	mv "$HOME/.cache/$new_config" "$HOME/.cache/nvim"
 }
 
 # ╭──────────────────────────────────────────────────────────╮

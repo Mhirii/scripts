@@ -1,5 +1,6 @@
 #!/bin/bash
 verbose=1
+terminal=alacritty
 rofi=0
 if [ "$1" == "rofi" ]; then
 	rofi=1
@@ -19,7 +20,7 @@ fi
 if [ $rofi -eq 1 ]; then
 	selected_project=$(echo $list | tr " " "\n" | rofi -dmenu -p "Select project: ")
 	if [ -n "$selected_project" ]; then
-		alacritty --hold -e "$project_launchers/$selected_project"
+		$terminal -e "$project_launchers/$selected_project"
 	fi
 else
 	selected_project=($(echo $list | tr " " "\n" | fzf --preview "cat {}" --preview-window=right:60%:wrap --height=40% --border --prompt="Select project: "))

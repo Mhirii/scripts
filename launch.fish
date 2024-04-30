@@ -8,7 +8,7 @@ end
 set arg $argv[1]
 
 # defaults
-set terminal alacritty
+set terminal wezterm
 set editor $EDITOR
 set files $FILEMANAGER
 
@@ -82,9 +82,9 @@ switch $arg
         ags -t applauncher
 
     case terminal
-        alacritty
+        $terminal
     case terminal2
-        wezterm
+        alacritty
 
     case tmux
         if tmux has
@@ -114,7 +114,7 @@ switch $arg
         cliphist list | rofi -dmenu | cliphist decode | wl-copy
 
     case spotify
-        spotify
+        spotify-launcher
 
     case spt
         spotifyd
@@ -169,7 +169,7 @@ switch $arg
         end
         switch $theme
             case tokyonight
-                hyprctl keyword general:col.active_border "rgba(f7768eff)"
+                hyprctl keyword general:col.active_border "rgba(7aa2f7ff)"
             case rosepine
                 hyprctl keyword general:col.active_border "rgba(31748fff)"
             case nero

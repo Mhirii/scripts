@@ -11,11 +11,11 @@ fi
 
 if ! echo "$sessions" | grep -q "$selection"; then
 	echo "Creating new session: $selection"
-	alacritty --class "$selection-tmux" -e tmux new -s "$selection" &
+	$terminal -e tmux new -s "$selection" &
 	exit 1
 fi
 
 if [[ -n $selection ]]; then
 	echo "Attaching to session: $selection"
-	alacritty --class "$selection-tmux" -e tmux attach -t "$selection" &
+	$terminal -e tmux attach -t "$selection" &
 fi
