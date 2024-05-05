@@ -8,7 +8,7 @@ end
 set arg $argv[1]
 
 # defaults
-set terminal wezterm
+set terminal alacritty
 set editor $EDITOR
 set files $FILEMANAGER
 
